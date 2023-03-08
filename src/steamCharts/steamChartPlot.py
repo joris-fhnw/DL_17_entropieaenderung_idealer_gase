@@ -17,28 +17,28 @@ def p_v_plot_2(pt1,pt2):
     plot1: Axes = figure.add_subplot(2, 1, 1)
     # plotting the isotherm in P_v diagram
     plot1.semilogx(1 / PropsSI("D", "P", Press, "T", pt1.T, "HEOS::Water"), Press / 1e5,
-                   label='Temperature = '+str(round(pt1.T-273.15,2)) + 'deg C')
+                   label='Temperature = '+str(round(pt1.T-273.15,2)) + '° C')
     if pt1.saturated == 'False':
         plot1.semilogx(1 / PropsSI("D", "P", pt1.p, "T", pt1.T, "HEOS::Water"), pt1.p / 1e5, 'ro', \
-                       label='P1 = ' + str(pt1.p / 1e5) + ' bar, ' + 'T = ' + str(round(pt1.T-273.15,2)) + 'deg C')
+                       label='P1 = ' + str(pt1.p / 1e5) + ' bar, ' + 'T = ' + str(round(pt1.T-273.15,2)) + '° C')
     else:
         v = 1 / PropsSI('D', 'P', pt1.p, 'Q', 0,
                         'Water')  # float(input('The state is saturated. Enter the speoific volume in m^3/kg '))
         plot1.semilogx(v, pt1.p / 1e5, "ro",
-                       label='P1 = ' + str(pt1.p / 1e5) + ' bar, ' + 'T = ' + str(round(pt1.T-273.15,2)) + 'deg C')
+                       label='P1 = ' + str(pt1.p / 1e5) + ' bar, ' + 'T = ' + str(round(pt1.T-273.15,2)) + '° C')
 
     Press2 = np.linspace(pt2.p + pt2.p_under, pt2.p + pt2.p_over, 200)
     # plotting the isotherm in P_v diagram
     plot1.semilogx(1 / PropsSI("D", "P", Press2, "T", pt2.T, "HEOS::Water"), Press2 / 1e5,
-                   label='Temperature = ' + str(round(pt2.T,2)) + ' K, ')
+                   label='Temperature = ' + str(round(pt2.T-273.15,2)) + ' °C, ')
     if pt2.saturated == 'False':
         plot1.semilogx(1 / PropsSI("D", "P", pt2.p, "T", pt2.T, "HEOS::Water"), pt2.p / 1e5, 'co',
-                       label='P2 = ' + str(round(pt2.p / 1e5,2)) + ' bar, ' + 'T = ' + str(round(pt2.T-273.15,2)) + 'deg C')
+                       label='P2 = ' + str(round(pt2.p / 1e5,2)) + ' bar, ' + 'T = ' + str(round(pt2.T-273.15,2)) + '° C')
     else:
         v = 1 / PropsSI('D', 'P', pt2.p, 'Q', 0,
                         'Water')  # float(input('The state is saturated. Enter the speoific volume in m^3/kg '))
         plot1.semilogx(v, pt2.p / 1e5, "co",
-                       label='P2 = ' + str(round(pt2.p / 1e5,2)) + ' bar, ' + 'T = ' + str(round(pt2.T-273.15,2)) + 'deg C')
+                       label='P2 = ' + str(round(pt2.p / 1e5,2)) + ' bar, ' + 'T = ' + str(round(pt2.T-273.15,2)) + '° C')
 
     # plotting the saturation states
     P_range = np.logspace(np.log10(611), np.log10(Pc), 1000)  # 611 is just above the triple point pressure
