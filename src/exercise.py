@@ -17,7 +17,7 @@ HEOS = CoolProp.AbstractState('HEOS', 'Water')
 
 class Exercise(AbstractExercise):
 
-    zahlen = [[200,7],[400,10],[800,30]]
+    zahlen = [[200,7],[400,10],[800,30],[900,50],[500,100]]
     counter = 0
     def start(self, W12: str = None,Q12: str = None) -> Output:
 
@@ -63,8 +63,7 @@ class Exercise(AbstractExercise):
         T1 = self.T
         p1 = self.p
         p2 = p1  #  [bar]
-        # T1 = 200  # [°C]
-        # p1 = 7  #  [bar]
+        score = 0  # Anzahl Punkte, welche der Student erhält
 
         T2 = PropsSI("T", "P", p2 * 1e5, "Q", 0, "HEOS::Water") - T_norm  # [°C]
 
@@ -78,29 +77,29 @@ class Exercise(AbstractExercise):
         dU = m*(u2-u1)  # [kJ]
         Q12_ca = dU-W12_ca  # [kJ]
 
-        figure = steamChartPlot.p_v_plot_2(pt1,pt2)
+        figure = steamChartPlot.p_v_plot_2(pt1,pt2)# Erzeugen des log(p)-h-Diagramms
 
         if abs(W12-W12_ca) <= 3:
             answ1 = "Die Arbeit wurde richtig berechnet!!\n"
             print(abs(W12-W12_ca))
-            print("Die Arbeit wurde richtig berechnet!!\n")
+            score += 1
         else:
             answ1 = f"die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(W12_ca)} kJ"
             print(abs(W12 - W12_ca))
-            print("falsch...\n")
 
         if abs(Q12-Q12_ca) <= 3:
             answ2 = "Die Wärme wurde richtig berechnet!!\n"
-            print(abs(Q12-Q12_ca))
-            print("Die Wärme wurde richtig berechnet!!\n")
+            score += 2
         else:
             answ2 = f"die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(Q12_ca)} kJ"
             print(abs(Q12 - Q12_ca))
-            print("falsch...\n")
+
         # Um die Arbeit zu berechnen, wird v1 und v2 (in [m3/kg]) benötigt
         return self.output \
         .add_paragraph(Latex("Da p1 = p2 ist, verschiebt sich der  Punkt horizontal zur x-Achse, bis zur Siedelinie")) \
         .add_figure(figure) \
         .add_paragraph(Latex(answ1)) \
         .add_paragraph(Latex(answ2)) \
+        .add_score(score)\
         .add_action('Back to start', self.start,W12 = W12, Q12 = Q12)
+

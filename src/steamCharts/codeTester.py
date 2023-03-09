@@ -7,6 +7,8 @@ from matplotlib.figure import Figure
 from matplotlib.pyplot import Axes
 import numpy as np
 
+"Hier kann der code unabhängig vom LTI-Tool getestet werden"
+
 HEOS = CoolProp.AbstractState('HEOS', 'Water')
 Tc = PropsSI("Tcrit", "Water")
 Pc = PropsSI("Pcrit", "Water")
