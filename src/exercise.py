@@ -52,7 +52,6 @@ class Exercise(AbstractExercise):
                 "benötigen Sie dU."
 
         return self.output \
-        .add_paragraph(f"Die Temperatur beträgt {self.T}°C")\
         .add_paragraph(Latex(hint1)) \
         .add_paragraph(Latex(hint2)) \
         .add_action('Back to start', self.start,W12 = W12, Q12 = Q12)
@@ -100,6 +99,5 @@ class Exercise(AbstractExercise):
         .add_figure(figure) \
         .add_paragraph(Latex(answ1)) \
         .add_paragraph(Latex(answ2)) \
-        .add_score(score)\
         .add_action('Back to start', self.start,W12 = W12, Q12 = Q12)
 

@@ -14,17 +14,25 @@ Tc = PropsSI("Tcrit", "Water")
 Pc = PropsSI("Pcrit", "Water")
 
 T_norm = 273.15
-T1 = 200
-p1 = 7
+T1 = 500
+p1 = 100
 p2 = p1
 T2 = PropsSI("T", "P", p2*1e5, "Q", 0, "HEOS::Water")-T_norm
 
 pt1 = steamCharts_ed8.SteamCharts(T1,p1)
 pt2 = steamCharts_ed8.SteamCharts(T2,p2)
-v2 = 1/PropsSI('D','P',p2*1e5,'Q',0,'Water')  # gesättigt
-v1 = A3_stem.v(T1,p1)
 
-steamChartPlot.p_v_plot(pt1,pt2)
+m=1
+v2 = 1 / PropsSI('D', 'P', p2 * 1e5, 'Q', 0, 'Water')  # gesättigt
+u2 = PropsSI('Umass', 'P', 7 * 1e5, 'Q', 0, 'Water') * 1e-3  # [kJ/kg]
+
+v1 = A3_stem.v(T1, p1)
+u1 = A3_stem.u(T1, p1)
+W12_ca = -m * p1 * 1e5 * (v2 - v1) * 1e-3  # [kJ]
+dU = m * (u2 - u1)  # [kJ]
+Q12_ca = dU - W12_ca  # [kJ]
+
+# steamChartPlot.p_v_plot(pt1,pt2)
 
 # Press = np.linspace(pt1.p + pt1.p_under, pt1.p + pt1.p_over, 200)
 #
