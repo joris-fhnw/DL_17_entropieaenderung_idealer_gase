@@ -37,19 +37,22 @@ class Exercise(AbstractExercise):
              Vorzeichen der beiden Energieübertragungen. \
             ''')) \
             .add_number_field(name='W12',
-                              label=Latex(r'Tragen Sie die Lösung für v1 in [m3/kg] ein'),
+                              label=Latex(r'Tragen Sie die Lösung für W12 in kJ] ein'),
                               value=W12) \
             .add_number_field(name='Q12',
-                              label=Latex(r'Tragen Sie die Lösung für v1 in [m3/kg] ein'),
+                              label=Latex(r'Tragen Sie die Lösung für Q12 in [kJ] ein'),
                               value=Q12) \
              .add_action('Loesung', self.loesung)\
              .add_action("Hint",self.hint)
 
 
     def hint(self,W12: str, Q12: str):
-        hint1 = "Um die Arbeit zu berechnen, benötigen sie das spezifische Volumen v1 und v2"
-        hint2 = "Die Wärmeabgabe muss in zwei Schritten berechnet werden. Für den ersten Schritt" \
-                "benötigen Sie dU."
+        hint1 = "Die Arbeit ist hier Volumenänderungsarbeit, dazu benötigen Sie den konstanten Druck und die " \
+                "spezifischen Volumen v1 und v2" \
+                ""
+        hint2 = "Für die Wärmemenge verwenden Sie die Energiebilanz, die gerade berechnete Arbeit und die spezifischen"\
+                "inneren Energien u1 und u2" \
+
 
         return self.output \
         .add_paragraph(Latex(hint1)) \
@@ -69,7 +72,7 @@ class Exercise(AbstractExercise):
         pt1 = steamCharts_ed8.SteamCharts(T1, p1)
         pt2 = steamCharts_ed8.SteamCharts(T2, p2)
         v2 = 1 / PropsSI('D', 'P', p2 * 1e5, 'Q', 0, 'Water')  # gesättigt
-        u2 = PropsSI('Umass','P',7*1e5,'Q',0,'Water')*1e-3  # [kJ/kg]
+        u2 = PropsSI('Umass','P',p2,'Q',0,'Water')*1e-3  # [kJ/kg]
         v1 = A3_stem.v(T1, p1)
         u1 = A3_stem.u(T1,p1)
         W12_ca = -m*p1*1e5*(v2-v1)*1e-3  # [kJ]
@@ -90,7 +93,7 @@ class Exercise(AbstractExercise):
             answ2 = "Die Wärme wurde richtig berechnet!!\n"
             score += 2
         else:
-            answ2 = f"die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(Q12_ca)} kJ"
+            answ2 = f"Die Wärme wurde falsch berechnet, die richtige Lösung ist: {round(Q12_ca)} kJ"
             print(abs(Q12 - Q12_ca))
 
         # Um die Arbeit zu berechnen, wird v1 und v2 (in [m3/kg]) benötigt

@@ -24,7 +24,7 @@ pt2 = steamCharts_ed8.SteamCharts(T2,p2)
 
 m=1
 v2 = 1 / PropsSI('D', 'P', p2 * 1e5, 'Q', 0, 'Water')  # gesättigt
-u2 = PropsSI('Umass', 'P', 7 * 1e5, 'Q', 0, 'Water') * 1e-3  # [kJ/kg]
+u2 = PropsSI('Umass', 'P', p2 * 1e5, 'Q', 0, 'Water') * 1e-3  # [kJ/kg]
 
 v1 = A3_stem.v(T1, p1)
 u1 = A3_stem.u(T1, p1)
