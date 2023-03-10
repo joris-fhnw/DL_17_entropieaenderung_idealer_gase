@@ -1,13 +1,7 @@
-from typing import List
-
-from matplotlib.figure import Figure
-from matplotlib.pyplot import Axes
 from pytm import AbstractExercise
 from pytm import Latex
-from pytm import Option
 from pytm import Output
 import random
-from .helpers import *
 from .steamCharts import *
 from CoolProp.CoolProp import PropsSI
 import CoolProp
