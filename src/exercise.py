@@ -22,30 +22,31 @@ class Exercise(AbstractExercise):
 
         return self.output \
             .add_paragraph(Latex(f'''
-            Eine Kolben-Zylinder-Anordnung enthält 1 kg Wasser, anfänglich bei T1 = {self.T} °C und einen Druck von {self.p/10} MPa
-             ({self.p} bar). Das Wasser im Zylinder durchläuft einen Prozess bei konstantem Druck bis am Ende 100 % gesättigte 
-             Flüssigkeit vorhanden ist. Vernachlässigen Sie die kinetischen und potenziellen Energiedifferenzen in der 
-             Energiebilanz. \ 
-             a.) Skizzieren Sie das p-v-Diagramm, welches die Zustände und den Prozess zeigt.\
+            Eine Kolben-Zylinder-Anordnung enthält 1 kg Wasser, anfänglich bei T1 = {self.T} °C und einen Druck von 
+            {self.p/10} MPa ({self.p} bar). Das Wasser im Zylinder durchläuft einen Prozess bei konstantem Druck bis
+             am Ende 100 Prozent gesättigte Flüssigkeit vorhanden ist. Vernachlässigen Sie die kinetischen und 
+             potenziellen Energiedifferenzen in der Energiebilanz. \n
+             a.) Skizzieren Sie das p-v-Diagramm, welches die Zustände und den Prozess zeigt.\n
              b.) Bestimmen Sie die Arbeit und die Wärmeübertragung für den Prozess, in kJ. Achten Sie auf die 
-             Vorzeichen der beiden Energieübertragungen. \
+             Vorzeichen der beiden Energieübertragungen. \n
+             \n
             ''')) \
             .add_number_field(name='W12',
-                              label=Latex(r'Tragen Sie die Lösung für W12 in kJ] ein'),
+                              label=Latex(r'Tragen Sie die Lösung für W12 in kJ ein'),
                               value=W12) \
             .add_number_field(name='Q12',
-                              label=Latex(r'Tragen Sie die Lösung für Q12 in [kJ] ein'),
+                              label=Latex(r'Tragen Sie die Lösung für Q12 in kJ ein'),
                               value=Q12) \
              .add_action('Loesung', self.loesung)\
              .add_action("Hint",self.hint)
 
 
     def hint(self,W12: str, Q12: str):
-        hint1 = "Die Arbeit ist hier Volumenänderungsarbeit, dazu benötigen Sie den konstanten Druck und die " \
+        hint1 = "-Die Arbeit ist hier Volumenänderungsarbeit, dazu benötigen Sie den konstanten Druck und die " \
                 "spezifischen Volumen v1 und v2" \
                 ""
-        hint2 = "Für die Wärmemenge verwenden Sie die Energiebilanz, die gerade berechnete Arbeit und die spezifischen"\
-                "inneren Energien u1 und u2" \
+        hint2 = "-Für die Wärmemenge verwenden Sie die Energiebilanz, die gerade berechnete Arbeit und die spezifischen"\
+                " inneren Energien u1 und u2" \
 
 
         return self.output \
@@ -66,7 +67,7 @@ class Exercise(AbstractExercise):
         pt1 = steamCharts_ed8.SteamCharts(T1, p1)
         pt2 = steamCharts_ed8.SteamCharts(T2, p2)
         v2 = 1 / PropsSI('D', 'P', p2 * 1e5, 'Q', 0, 'Water')  # gesättigt
-        u2 = PropsSI('Umass','P',p2,'Q',0,'Water')*1e-3  # [kJ/kg]
+        u2 = PropsSI('Umass','P',p2*1e5,'Q',0,'Water')*1e-3  # [kJ/kg]
         v1 = A3_stem.v(T1, p1)
         u1 = A3_stem.u(T1,p1)
         W12_ca = -m*p1*1e5*(v2-v1)*1e-3  # [kJ]
@@ -80,7 +81,7 @@ class Exercise(AbstractExercise):
             print(abs(W12-W12_ca))
             score += 1
         else:
-            answ1 = f"die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(W12_ca)} kJ"
+            answ1 = f"Die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(W12_ca)} kJ"
             print(abs(W12 - W12_ca))
 
         if abs(Q12-Q12_ca) <= 3:
