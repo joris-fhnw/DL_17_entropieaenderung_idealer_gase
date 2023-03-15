@@ -38,6 +38,8 @@ class Exercise(AbstractExercise):
                               label=Latex(r'Tragen Sie die Lösung für Q12 in kJ ein'),
                               value=Q12) \
              .add_action('Loesung', self.loesung)\
+             .add_paragraph("Um den Hinweis zu sehen, müssen Sie erst einen Zahlenwert (keine Buchstaben etc.,"
+                            " in die beiden Antwortfelder eintragen)")\
              .add_action("Hinweis",self.hint)
 
 
