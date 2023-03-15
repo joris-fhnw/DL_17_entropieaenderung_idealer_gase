@@ -38,7 +38,7 @@ class Exercise(AbstractExercise):
                               label=Latex(r'Tragen Sie die Lösung für Q12 in kJ ein'),
                               value=Q12) \
              .add_action('Loesung', self.loesung)\
-             .add_action("Hint",self.hint)
+             .add_action("Hinweis",self.hint)
 
 
     def hint(self,W12: str, Q12: str):
@@ -52,7 +52,7 @@ class Exercise(AbstractExercise):
         return self.output \
         .add_paragraph(Latex(hint1)) \
         .add_paragraph(Latex(hint2)) \
-        .add_action('Back to start', self.start,W12 = W12, Q12 = Q12)
+        .add_action('Zurück zur Aufgabenstellung', self.start,W12 = W12, Q12 = Q12)
 
     def loesung(self,W12: str, Q12: str) -> Output:
         T_norm = 273.15
@@ -97,5 +97,5 @@ class Exercise(AbstractExercise):
         .add_figure(figure) \
         .add_paragraph(Latex(answ1)) \
         .add_paragraph(Latex(answ2)) \
-        .add_action('Back to start', self.start,W12 = W12, Q12 = Q12)
+        .add_action('Zurück zur Aufgabenstellung', self.start,W12 = W12, Q12 = Q12)
 

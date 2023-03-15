@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="run" type="Python.FlaskServer">
     <option name="flaskDebug" value="true" />
-    <module name="pytm-example" />
+    <module name="digitale_lehre_Kolben_Zylinder" />
     <option name="target" value="$PROJECT_DIR$/app.py" />
     <option name="targetType" value="PATH" />
     <option name="INTERPRETER_OPTIONS" value="" />
