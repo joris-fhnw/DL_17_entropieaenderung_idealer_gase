@@ -81,14 +81,14 @@ class Exercise(AbstractExercise):
         if abs(W12-W12_ca) <= 3:
             answ1 = "Die Arbeit wurde richtig berechnet!!\n"
             print(abs(W12-W12_ca))
-            score += 1
+            score += 1/3
         else:
             answ1 = f"Die Arbeit wurde falsch berechnet, die richtige Lösung ist: {round(W12_ca)} kJ"
             print(abs(W12 - W12_ca))
 
         if abs(Q12-Q12_ca) <= 3:
             answ2 = "Die Wärme wurde richtig berechnet!!\n"
-            score += 2
+            score += 2/3
         else:
             answ2 = f"Die Wärme wurde falsch berechnet, die richtige Lösung ist: {round(Q12_ca)} kJ"
             print(abs(Q12 - Q12_ca))
